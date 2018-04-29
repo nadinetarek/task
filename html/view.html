@@ -1,0 +1,70 @@
+
+<html>
+    <head> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+   <script src="http://requirejs.org/docs/release/2.2.0/minified/require.js"></script>
+    <!-- <script src="./server.js" charset="UTF-8"></script> -->
+    </head>
+    <body>
+           
+       <h1>Admin Login</h1>
+       <form>
+           <div><p>Name:</p><input id="admin" type="name"/></div>
+           <div><p>Password:</p><input id="pass" type="password"/></div>
+          <button style="margin-top:10px;" type="reset" id="submitButton">Login</button>
+       </form>
+       <div class="employees">
+           <p id="listOfEmployees"></p>
+           <Button id="add">Add Employee</Button>
+           <div><p>First Name:</p><input id="user-Fname" type="name"/></div>  
+           <div><p>Last Name:</p><input id="user-Lname" type="name"/></div> 
+           <div><p>Rating:</p><input id="rating" /></div>   
+           <Button id="done">Done</Button>
+           <Button id="edit">Edit Employee</Button>
+           <Button id="delete">Delete Employee</Button>
+           <p id="out"></p>
+        </div>
+       <script>
+             $(".employees").hide();
+            $('#submitButton').click(function() {
+                if($('#pass').val()=="Nadine-94"){
+                    alert("ADMIN") 
+                    
+          
+                    $(".employees").show();
+
+                }
+                    ;
+                    $("edit").click(function() {
+                var payload = {
+            firstName: $('#user-Fname').val(),
+            lastName:  $('#user-Lname').val(),
+            rating: $('#rating').val()
+        };
+        $("done").click(function() {
+        console.log("name" +name)
+             
+        $.ajax({
+            url: "/editEmployees",
+            type: "POST",
+            contentType: "application/json",
+            processData: false,
+            data: JSON.stringify(payload),
+            complete: function (data) {
+                $('#out').html(data.responseText);
+            }
+        });
+            });
+    });
+
+
+                    
+              });
+             
+         
+ 
+            </script>
+           
+    </body>
+    
+</html>
